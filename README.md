@@ -22,7 +22,7 @@ Six components, each solving a specific failure class:
 
 ```
 ┌────────────────────────────────────────────┐
-│               AGENT HARNESS                │
+│               KAIZEN HARNESS               │
 ├────────────┬───────────────┬───────────────┤
 │ TRAJECTORY │ RETROSPECTIVE │   COUNCIL     │
 │   LOGGER   │ OPTIMIZATION  │   DEBATES     │
