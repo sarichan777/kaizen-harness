@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Harness runtime data (logs, state files)
+harness/trajectories.jsonl
+harness/failure-memory.jsonl
+harness/self-heal-state.json
+
+# Secrets / env
+.env
+*.env.local
+*.env.production
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Build artifacts
+dist/
+build/
+*.tsbuildinfo
+
+# Temp files
+*.tmp
+*.bak
+*~
+*.swp
+*.swo
