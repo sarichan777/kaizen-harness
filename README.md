@@ -65,7 +65,7 @@ source patterns/trajectory-logger/trajectory-logger.sh
 log_trajectory "my test task" "gpt-4" "curl,grep" "success" "" "everything worked"
 
 # Run a council debate on any question
-npx tsx patterns/council-debate/council-debate.ts "Should I use Redis or just write to a file?"
+npx tsx patterns/council-debate/council-debate.ts "Should we use Redis or just write to a file?"
 ```
 
 See [GETTING-STARTED.md](docs/GETTING-STARTED.md) for the full walkthrough.
