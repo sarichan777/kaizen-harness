@@ -78,7 +78,7 @@ import json, os
 state = {}
 if os.path.exists('$HEAL_STATE'):
     state = json.load(open('$HEAL_STATE'))
-state['$fingerprint'] = {'last_heal': '$timestamp', 'success': $success}
+state['$fingerprint'] = {'last_heal': '$timestamp', 'success': '$success' == 'true'}
 json.dump(state, open('$HEAL_STATE', 'w'), indent=2)
 print(f'Recorded heal attempt: $fingerprint -> $success')
 "

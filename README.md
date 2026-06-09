@@ -4,6 +4,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+![Kaizen Harness demo: the self-healing pattern reads its failure memory, auto-patches three known failure classes with verification, and escalates the unrecognized one to a council debate](docs/demo.gif)
+
+> The self-healing pattern running standalone: it reads failure memory, matches each failure against known fingerprint classes, auto-patches and verifies the three it recognizes, and escalates the unknown class to a council debate. No API keys, no network.
+
 ---
 
 ## The model is the engine. The harness is everything else.
