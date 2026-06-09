@@ -89,6 +89,21 @@ Read [WHY-HARNESS.md](docs/WHY-HARNESS.md) for the full case, backed by research
 - **UC Berkeley system-scaling framework:** LLM + memory + context + skill routing + orchestration + verification/governance. The model is 1 of 6 pieces.
 - **RHO paper (Microsoft Research):** Agents that improve their own harness from past failures
 
+## Contributing
+
+Harness patterns are infrastructure. If you have built something that catches failures, saves time, or forces better decisions from your AI agents, share it here.
+
+[![Good First Issue](https://img.shields.io/github/issues/sarichan777/kaizen-harness/good%20first%20issue?label=good%20first%20issue&color=7057ff)](https://github.com/sarichan777/kaizen-harness/issues/1)
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) for the pattern template and PR process. Quick overview:
+
+- Fork the repo and create a `patterns/<your-pattern>/` directory
+- Write a README with: Problem, Solution, What We Learned, Usage, Tradeoffs
+- Include a working script or template
+- Open a PR against `main`
+
+Pattern ideas: rate limiting, memory compaction, model fallback chains, audit trail logging, permission gating, drift detection, cost budgeting. See the [discussions](https://github.com/sarichan777/kaizen-harness/discussions/2) for more.
+
 ## License
 
 MIT — use these patterns, adapt them, ship them. See [LICENSE](LICENSE).
