@@ -25,17 +25,29 @@ We run a self-heal system (`self-heal.ts`) on a 20-minute interval across our in
 - **Fingerprinting matters more than classification.** Two failures that look similar ("process died") need different fingerprints if the root cause is different (OOM kill vs. macOS TCC kill vs. PM2 restart cascade). Same fix doesn't apply.
 - **Rate limiting prevents cascading failures.** Without the 6-hour cooldown, a flaky fix would trigger re-patch → re-fail → re-patch endlessly. The rate limiter forces the system to escalate instead.
 - **Verification after every fix is non-negotiable.** The first version of self-heal applied patches and assumed they worked. We added post-fix verification (run the tests, check the process is up) after a bad patch made things worse.
+- **The self-heal is blind without a failure memory bridge.** We ran system audits that caught real failures (dead agents, unreachable websites, PM2 process crashes), but the audit results never reached the failure memory log. The self-heal had no way to see them. Adding a bridge that writes audit failures into the failure memory log closes the loop.
+- **Misconfigured monitoring creates false positives.** One of our checks used the wrong process pattern (`ssh -R` instead of `ssh -L`), so it flagged the SSH tunnel as down every cycle even though it was running. Another check monitored a website that has no production deployment. Blindly auto-patching false positives would have been destructive. Validate your monitoring before wiring it to repair.
+- **Not all fixes are code edits.** Some failures need operational actions: launching a process, reloading nginx, restarting a PM2 service. These are commands, not code diffs. The auto-patch logic needs to handle both classes.
 
 ## Auto-Patch Classes
 
-Known failure patterns we auto-fix:
+Known failure patterns we auto-fix. Code-level patches change files. Operational patches run service commands.
+
+### Code-level patches
 
 | Failure Class | Fingerprint | Auto-Patch |
 |---|---|---|
 | `model_timeout` | API timeout on specific model | Switch to alternate model, add timeout threshold |
-| `vps_unreachable` | SSH connection failed | Check connectivity, restart tunnel if needed |
 | `empty_response` | API returned empty body | Retry with explicit format instruction |
 | `context_overflow` | Token limit exceeded | Compact context, reduce scope |
+
+### Operational patches (process/service level)
+
+| Failure Class | Fingerprint | Auto-Patch | Verify |
+|---|---|---|---|
+| `agent_down` | LaunchAgent process missing | `launchctl kickstart` | pgrep + port check |
+| `http_failure` | Website returns non-200 | SSH reload nginx, restart backend | curl 200 on affected sites |
+| `pm2_loop` | PM2 process restart cascade | SSH restart PM2 app, reset counter | grep for healthy state in log |
 
 ## Usage
 
