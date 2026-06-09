@@ -4,9 +4,9 @@
 
 Every month brings a new model that scores 8% better on some benchmark. The AI industry is obsessed with model upgrades.
 
-Meanwhile, a Stanford/Tsinghua study found the same model can be **6x more effective** depending on what's around it. Memory. Tool access. Verification. Failure recovery. The harness.
+Meanwhile, a Stanford/MIT study found the same model can show a **6x performance gap** on the same benchmark depending on what's around it. Memory. Tool access. Verification. Failure recovery. The harness.
 
-UC Berkeley researchers mapped what it takes to build an effective AI system:
+An effective AI system is more than the model. It takes:
 
 > LLM + memory + context + skill routing + orchestration + verification/governance
 
@@ -14,9 +14,9 @@ The model is one piece of six. Getting any of the other five wrong undermines wh
 
 ## The Hashimoto Principle
 
-Mitchell Hashimoto (co-founder of HashiCorp) gave the clearest framing of harness engineering:
+Mitchell Hashimoto (co-founder of HashiCorp, creator of Ghostty) coined the term harness engineering and framed it like this:
 
-> "When an AI agent makes a mistake, don't rerun the prompt. Change the system so that entire class of mistakes stops happening."
+> "anytime you find an agent makes a mistake, you take the time to engineer a solution such that the agent never makes that mistake again."
 
 Most people respond to an agent error by tweaking the prompt. The prompt is not the problem. The system that allowed the error to happen is the problem.
 
@@ -31,7 +31,7 @@ Each fix addresses the class of error, not the instance. That's harness engineer
 
 ## The RHO Paper
 
-Microsoft Research formalized this as RHO: **Retrospective Harness Optimization.** The insight: agents can improve their own harness by analyzing past failures.
+Microsoft Research Asia formalized this as RHO: **Retrospective Harness Optimization.** The insight: agents can improve their own harness by learning from past trajectories, no labeled validation set required.
 
 The loop:
 1. Log every action with structured failure types
@@ -51,7 +51,7 @@ From running our harness system:
 
 - **40+ verification checks** across 3 machines, every 20 minutes
 - **6 model seats** in parallel council debates, all free models
-- **Failure memory** with structured attribution (UC Berkeley / RHO taxonomy)
+- **Failure memory** with structured attribution (RHO-style failure taxonomy)
 - **90% reduction** in paid API costs through model routing
 - **Zero human intervention** for routine failures since LaunchAgent wrapping
 
@@ -59,7 +59,6 @@ These aren't research numbers. They're from infrastructure that runs 24/7.
 
 ## References
 
-- [Stanford/Singhua: Same model, 6x variance study](https://arxiv.org/abs/2502.03885)
-- [UC Berkeley: AI Agent System Scaling](https://arxiv.org/abs/2502.06754)
-- [Microsoft Research: RHO (Retrospective Harness Optimization)](https://arxiv.org/abs/2502.11718)
-- Mitchell Hashimoto on harness engineering (YouTube, 6.2K views)
+- [Meta-Harness: End-to-End Optimization of Model Harnesses (Stanford/MIT/KRAFTON)](https://arxiv.org/abs/2603.28052)
+- [Retrospective Harness Optimization (Microsoft Research Asia, City University of Hong Kong)](https://arxiv.org/abs/2606.05922)
+- [Mitchell Hashimoto, My AI Adoption Journey](https://mitchellh.com/writing/my-ai-adoption-journey)
