@@ -20,7 +20,7 @@ The system remembers its own repair history. If a patch fails, it records that t
 
 ## What We Learned
 
-Our self-heal system (`ralph-self-heal.ts`) runs every 20 minutes across our infrastructure. We learned:
+We run a self-heal system (`self-heal.ts`) on a 20-minute interval across our infrastructure. We learned:
 
 - **Fingerprinting matters more than classification.** Two failures that look similar ("process died") need different fingerprints if the root cause is different (OOM kill vs. macOS TCC kill vs. PM2 restart cascade). Same fix doesn't apply.
 - **Rate limiting prevents cascading failures.** Without the 6-hour cooldown, a flaky fix would trigger re-patch → re-fail → re-patch endlessly. The rate limiter forces the system to escalate instead.
